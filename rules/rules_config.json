@@ -1,0 +1,90 @@
+{
+  "version": "1.0",
+  "description": "AWS IAM Misconfiguration Scanner - Rule Definitions",
+  "rules": [
+    {
+      "rule_id": "RULE_001",
+      "rule_name": "ROOT_ACCOUNT_NO_MFA",
+      "severity": "CRITICAL",
+      "description": "Root account does not have MFA enabled.",
+      "remediation": "Enable MFA on root account immediately."
+    },
+    {
+      "rule_id": "RULE_002",
+      "rule_name": "USER_NO_MFA",
+      "severity": "HIGH",
+      "description": "IAM user has console access but no MFA enabled.",
+      "remediation": "Enable MFA for the user."
+    },
+    {
+      "rule_id": "RULE_003",
+      "rule_name": "WILDCARD_ADMIN_POLICY",
+      "severity": "CRITICAL",
+      "description": "Policy grants full administrative access (*:*)",
+      "remediation": "Use least privilege policies."
+    },
+    {
+      "rule_id": "RULE_004",
+      "rule_name": "STALE_ACCESS_KEY",
+      "severity": "HIGH",
+      "description": "Access key has not been used for >90 days.",
+      "remediation": "Deactivate and delete unused keys."
+    },
+    {
+      "rule_id": "RULE_005",
+      "rule_name": "ACCESS_KEY_AGE",
+      "severity": "MEDIUM",
+      "description": "Access key older than 90 days without rotation.",
+      "remediation": "Rotate access keys every 90 days."
+    },
+    {
+      "rule_id": "RULE_006",
+      "rule_name": "INLINE_POLICY_WILDCARD",
+      "severity": "HIGH",
+      "description": "Inline policy grants wildcard permissions.",
+      "remediation": "Convert to least-privilege managed policy."
+    },
+    {
+      "rule_id": "RULE_007",
+      "rule_name": "OVERLY_PERMISSIVE_TRUST_POLICY",
+      "severity": "CRITICAL",
+      "description": "Role trust policy allows any principal (*).",
+      "remediation": "Restrict Principal in trust policy."
+    },
+    {
+      "rule_id": "RULE_008",
+      "rule_name": "PRIVILEGE_ESCALATION_PERMISSIONS",
+      "severity": "HIGH",
+      "description": "Entity has permissions that can lead to privilege escalation.",
+      "remediation": "Remove unnecessary high-privilege actions."
+    },
+    {
+      "rule_id": "RULE_009",
+      "rule_name": "WEAK_PASSWORD_POLICY",
+      "severity": "MEDIUM",
+      "description": "Account password policy is too permissive.",
+      "remediation": "Enforce strong password policy (14+ chars, complexity, rotation)."
+    },
+    {
+      "rule_id": "RULE_010",
+      "rule_name": "DIRECT_POLICY_ATTACHMENT",
+      "severity": "LOW",
+      "description": "Policies attached directly to users instead of groups.",
+      "remediation": "Use IAM groups for policy management."
+    },
+    {
+      "rule_id": "RULE_011",
+      "rule_name": "CROSS_ACCOUNT_TRUST_NO_EXTERNAL_ID",
+      "severity": "HIGH",
+      "description": "Cross-account trust without ExternalId condition.",
+      "remediation": "Require sts:ExternalId in trust policy."
+    },
+    {
+      "rule_id": "RULE_012",
+      "rule_name": "NO_CONDITION_SENSITIVE_ACTIONS",
+      "severity": "MEDIUM",
+      "description": "Broad permissions granted without any Condition constraints.",
+      "remediation": "Add aws:SourceIp, MFA, or other conditions."
+    }
+  ]
+}
